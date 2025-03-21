@@ -4,6 +4,7 @@ import asyncio
 import importlib
 from sys import argv
 from pyrogram import idle
+from pyrogram.errors import PeerIdInvalid
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors.exceptions.bad_request_400 import (
@@ -24,7 +25,7 @@ from PROMUSIC.utils.decorators.language import language
 from datetime import datetime
 CLONES = set()
 
-C_BOT_DESC = "Wᴀɴᴛ ᴀ ʙᴏᴛ ʟɪᴋᴇ ᴛʜɪs? Cʟᴏɴᴇ ɪᴛ ɴᴏᴡ! ✅\n\nVɪsɪᴛ: @THUNDERDEVS ᴛᴏ ɢᴇᴛ sᴛᴀʀᴛᴇᴅ!\n\n - Uᴘᴅᴀᴛᴇ: @THUNDER_SUPPORT_ll\n - Sᴜᴘᴘᴏʀᴛ: @THUNDERDEVS"
+C_BOT_DESC = "Wᴀɴᴛ ᴀ ʙᴏᴛ ʟɪᴋᴇ ᴛʜɪs? Cʟᴏɴᴇ ɪᴛ ɴᴏᴡ! ✅\n\nVɪsɪᴛ: @ll_ISTKHAR_BABY_lll ᴛᴏ ɢᴇᴛ sᴛᴀʀᴛᴇᴅ!\n\n - Uᴘᴅᴀᴛᴇ: @THUNDERDEVS\n - Sᴜᴘᴘᴏʀᴛ: @THUNDERDEVS"
 
 C_BOT_COMMANDS = [
                 {"command": "/start", "description": "sᴛᴀʀᴛs ᴛʜᴇ ᴍᴜsɪᴄ ʙᴏᴛ"},
@@ -137,7 +138,7 @@ async def clone_txt(client, message, _):
         except BaseException as e:
             logging.exception("Error while cloning bot.")
             await mi.edit_text(
-                f"⚠️ <b>ᴇʀʀᴏʀ:</b>\n\n<code>{e}</code>\n\n**ᴋɪɴᴅʟʏ ғᴏᴡᴀʀᴅ ᴛʜɪs ᴍᴇssᴀɢᴇ ᴛᴏ @RAM_HACKER_RP ᴛᴏ ɢᴇᴛ ᴀssɪsᴛᴀɴᴄᴇ**"
+                f"⚠️ <b>ᴇʀʀᴏʀ:</b>\n\n<code>{e}</code>\n\n**ᴋɪɴᴅʟʏ ғᴏᴡᴀʀᴅ ᴛʜɪs ᴍᴇssᴀɢᴇ ᴛᴏ @Legend_mickey ᴛᴏ ɢᴇᴛ ᴀssɪsᴛᴀɴᴄᴇ**"
             )
     else:
         await message.reply_text(_["C_B_H_1"])
@@ -297,8 +298,7 @@ async def my_cloned_bots(client, message, _):
         await message.reply_text("An error occurred while fetching your cloned bots.")
 
 
-
-@app.on_message(filters.command("cloned") & SUDOERS)
+@app.on_message(filters.command("cloned"))
 @language
 async def list_cloned_bots(client, message, _):
     try:
@@ -309,22 +309,46 @@ async def list_cloned_bots(client, message, _):
 
         total_clones = len(cloned_bots)
         text = f"**Tᴏᴛᴀʟ Cʟᴏɴᴇᴅ Bᴏᴛs: `{total_clones}`**\n\n"
+        messages = []  # छोटे-छोटे मैसेज स्टोर करने के लिए लिस्ट
 
         for bot in cloned_bots:
+            user_id = bot.get("user_id")
+            if not user_id:
+                bot_info = f"⚠️ **Bᴏᴛ ID:** `{bot['bot_id']}` - Owner ID not found.\n\n"
+            else:
+                try:
+                    owner = await client.get_users(user_id)
+                    owner_name = owner.first_name or "Unknown"
+                    owner_profile_link = f"tg://user?id={user_id}"
+                except PeerIdInvalid:
+                    logging.warning(f"PeerIdInvalid for user_id: {user_id}")
+                    owner_name = "❌ Invalid User"
+                    owner_profile_link = "#"
+                except Exception as err:
+                    logging.exception(err)
+                    owner_name = "⚠️ Error Fetching Owner"
+                    owner_profile_link = "#"
 
-            # Fetch the bot owner's details using their user_id
-            owner = await client.get_users(bot['user_id'])
-            
-            # Prepare the profile link and first name
-            owner_name = owner.first_name
-            owner_profile_link = f"tg://user?id={bot['user_id']}"
+                bot_info = (
+                    f"**Bᴏᴛ ID:** `{bot['bot_id']}`\n"
+                    f"**Bᴏᴛ Nᴀᴍᴇ:** {bot['name']}\n"
+                    f"**Bᴏᴛ Usᴇʀɴᴀᴍᴇ:** @{bot['username']}\n"
+                    f"**Oᴡɴᴇʀ:** [{owner_name}]({owner_profile_link})\n\n"
+                )
 
-            text += f"**Bᴏᴛ ID:** `{bot['bot_id']}`\n"
-            text += f"**Bᴏᴛ Nᴀᴍᴇ:** {bot['name']}\n"
-            text += f"**Bᴏᴛ Usᴇʀɴᴀᴍᴇ:** @{bot['username']}\n"
-            text += f"**Oᴡɴᴇʀ:** [{owner_name}]({owner_profile_link})\n\n"
+            if len(text) + len(bot_info) > 4000:  # मैसेज लिमिट से पहले भेजें
+                messages.append(text)
+                text = ""
 
-        await message.reply_text(text)
+            text += bot_info
+
+        messages.append(text)  # आखिरी बचे टेक्स्ट को लिस्ट में ऐड करें
+
+        # छोटे-छोटे मैसेज भेजें
+        for msg in messages:
+            if msg.strip():  # अगर मैसेज खाली नहीं है
+                await message.reply_text(msg)
+
     except Exception as e:
         logging.exception(e)
         await message.reply_text("An error occurred while listing cloned bots.")
