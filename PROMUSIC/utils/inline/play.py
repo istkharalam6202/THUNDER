@@ -34,25 +34,25 @@ def stream_markup_timer(_, chat_id, played, dur):
     percentage = (played_sec / duration_sec) * 100
     umm = math.floor(percentage)
     if 0 < umm <= 10:
-        bar = "🌹—————————"
+        bar = "◉—————————"
     elif 10 < umm < 20:
-        bar = "—🌹————————"
+        bar = "—◉————————"
     elif 20 <= umm < 30:
-        bar = "——🌹———————"
+        bar = "——◉———————"
     elif 30 <= umm < 40:
-        bar = "———🌹——————"
+        bar = "———◉——————"
     elif 40 <= umm < 50:
-        bar = "————🌹—————"
+        bar = "————◉—————"
     elif 50 <= umm < 60:
-        bar = "—————🌹————"
+        bar = "—————◉————"
     elif 60 <= umm < 70:
-        bar = "——————🌹———"
+        bar = "——————◉———"
     elif 70 <= umm < 80:
-        bar = "———————🌹——"
+        bar = "———————◉——"
     elif 80 <= umm < 95:
-        bar = "————————🌹—"
+        bar = "————————◉—"
     else:
-        bar = "𓆰꯭꯭♔꯭꯭𝐕ɪ֟፝‌꯭ᴘ꯭ 𝗝꯭ᴀ꯭፝֟͠ɴ꯭ɪ꯭꯭"
+        bar = "—————————◉"
     buttons = [
         [
             InlineKeyboardButton(
@@ -69,10 +69,10 @@ def stream_markup_timer(_, chat_id, played, dur):
         ],
         [
             InlineKeyboardButton(
-                text="˹ ❍ᴡɴᴇꝛ ˼", url=f"http://t.me/RAM_HACKER_RP"
+                text="˹ ❍ᴡɴᴇꝛ ˼", url=f"https://t.me/ll_ISTKHAR_BABY_lll"
             ),
             InlineKeyboardButton(
-                text="˹ 𝐒υρροяτ ˼", url=f"https://t.me/+33xavd1LCCk1MjRl"
+                text="˹ 𝐒υρροяτ ˼", url=f"https://t.me/THUNDERDEVS"
             ),
         ],
         [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
@@ -236,10 +236,10 @@ def stream_markup2(_, chat_id):
         ],
         [
             InlineKeyboardButton(
-                text="˹ ❍ᴡɴᴇꝛ ˼", url=f"http://t.me/RAM_HACKER_RP"
+                text="˹ ❍ᴡɴᴇꝛ ˼", url=f"https://t.me/ll_ISTKHAR_BABY_lll"
             ),
             InlineKeyboardButton(
-                text="˹ 𝐒υρροяτ ˼", url=f"https://t.me/+33xavd1LCCk1MjRl"
+                text="˹ 𝐒υρροяτ ˼", url=f"https://t.me/THUNDERDEVS"
             ),
         ],
         [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
@@ -253,21 +253,21 @@ def stream_markup_timer2(_, chat_id, played, dur):
     percentage = (played_sec / duration_sec) * 100
     umm = math.floor(percentage)
     if 0 < umm <= 40:
-        bar = "🌹——————————"
+        bar = "◉——————————"
     elif 10 < umm < 20:
-        bar = "—🌹—————————"
+        bar = "—◉—————————"
     elif 20 < umm < 30:
-        bar = "——🌹————————"
+        bar = "——◉————————"
     elif 30 <= umm < 40:
-        bar = "———🌹———————"
+        bar = "———◉———————"
     elif 40 <= umm < 50:
-        bar = "————🌹——————"
+        bar = "————◉——————"
     elif 50 <= umm < 60:
-        bar = "——————🌹————"
+        bar = "——————◉————"
     elif 50 <= umm < 70:
-        bar = "———————🌹———"
+        bar = "———————◉———"
     else:
-        bar = "𓆰꯭꯭♔꯭꯭𝐕ɪ֟፝‌꯭ᴘ꯭ 𝗝꯭ᴀ꯭፝֟͠ɴ꯭ɪ꯭꯭"
+        bar = "——————————◉"
 
     buttons = [
         [
@@ -448,21 +448,21 @@ def panel_markup_4(_, vidid, chat_id, played, dur):
     percentage = (played_sec / duration_sec) * 100
     umm = math.floor(percentage)
     if 0 < umm <= 40:
-        bar = "🌹——————————"
+        bar = "◉——————————"
     elif 10 < umm < 20:
-        bar = "—🌹—————————"
+        bar = "—◉—————————"
     elif 20 < umm < 30:
-        bar = "——🌹————————"
+        bar = "——◉————————"
     elif 30 <= umm < 40:
-        bar = "———🌹———————"
+        bar = "———◉———————"
     elif 40 <= umm < 50:
-        bar = "————🌹——————"
+        bar = "————◉——————"
     elif 50 <= umm < 60:
-        bar = "——————🌹————"
+        bar = "——————◉————"
     elif 50 <= umm < 70:
-        bar = "———————🌹———"
+        bar = "———————◉———"
     else:
-        bar = "𓆰꯭꯭♔꯭꯭𝐕ɪ֟፝‌꯭ᴘ꯭ 𝗝꯭ᴀ꯭፝֟͠ɴ꯭ɪ꯭꯭"
+        bar = "——————————◉"
 
     buttons = [
         [
@@ -519,10 +519,10 @@ def panel_markup_clone(_, vidid, chat_id):
         ],
         [
             InlineKeyboardButton(
-                text="˹ ❍ᴡɴᴇꝛ ˼", url=f"http://t.me/RAM_HACKER_RP"
+                text="˹ ❍ᴡɴᴇꝛ ˼", url=f"https://t.me/ll_ISTKHAR_BABY_lll"
             ),
             InlineKeyboardButton(
-                text="˹ 𝐒υρρяτ ˼", url=f"https://t.me/+33xavd1LCCk1MjRl"
+                text="˹ 𝐒υρρяτ ˼", url=f"https://t.me/THUNDERDEVS"
             ),
         ],
         [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
